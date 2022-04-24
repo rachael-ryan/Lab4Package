@@ -111,12 +111,3 @@ what_graph <- function(df, var1, var2 = as.numeric(), fill = as.numeric(), palet
 
 
 }
-
-#hi
-
-# hi this is a test from sam
-#hello sam!
-
-#hey guys!!
-
-#meowwwwwwww
