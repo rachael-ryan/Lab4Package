@@ -1,12 +1,15 @@
+
+
 what_graph <- function(df, var1, var2 = as.numeric(), fill = as.numeric()){
 
   numeric_count <- 0
   factor_count <- 0
-  total_count <- c()
+  total_count <- 0
 
   # Classify First Variable
   one <- df %>%
     pull({{var1}})
+  print(one)
 
   if (is.numeric(one)){
 
@@ -32,6 +35,7 @@ what_graph <- function(df, var1, var2 = as.numeric(), fill = as.numeric()){
 
   two <- df %>%
     pull({{var2}})
+  print(two)
 
   if (is.numeric(two)){
 
@@ -79,12 +83,12 @@ what_graph <- function(df, var1, var2 = as.numeric(), fill = as.numeric()){
 
   # Choose Which Graph to use
 
-  if total_count == 1 & is.numeric(one)){
+  if (total_count == 1 & is.numeric(one)){
 
     graphs <- c("Histogram", "Density Plot")
     return(graphs)
   }
-  else if total_count == 1 & is.factor(one)){
+  else if (total_count == 1 & is.factor(one)){
 
     graphs <- c("Barplot", "Lollipop", "Waffle", "Word Cloud", " Dougnut", "Treemap", "Pie")
     return(graphs)
@@ -104,7 +108,7 @@ what_graph <- function(df, var1, var2 = as.numeric(), fill = as.numeric()){
   }
 
 
-  } else if (total_count == 2 & numeric_count == 0) {
+  else if (total_count == 2 & numeric_count == 0) {
 
     graphs <- c("Venn Diagram", "Treemap", "Sunburst", "Barplot", "Stacked Bartplot", "Grouped Barplot", "Lollipop", "Spider Plot")
     return(graphs)
@@ -115,3 +119,5 @@ what_graph <- function(df, var1, var2 = as.numeric(), fill = as.numeric()){
 
 
 }
+iris %>%
+  what_graph(Sepal.Length)
