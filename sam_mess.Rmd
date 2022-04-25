@@ -1,0 +1,229 @@
+---
+title: "Untitled"
+author: "Trenten Tso"
+date: '2022-04-25'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+what_graph <- function(df, var1, var2 = NULL, fill = NULL){
+
+  numeric_count <- 0
+  factor_count <- 0
+  total_count <- 0
+
+  # Classify First Variable
+  one <- df %>%
+    pull({{var1}})
+
+  if (is.numeric(one)){
+
+    numeric_count <- numeric_count + 1
+    total_count <- total_count + 1
+
+  } else if (is.factor(one)){
+
+    total_count <- total_count + 1
+
+
+  }
+
+  else {
+
+    stop("please input your first variable as numeric or factor type")
+
+  }
+
+print(numeric_count)
+
+  # Classify Second Variable
+
+  two <- df %>%
+    pull({{var2}})
+
+  if (is.numeric(two)){
+
+    numeric_count <- numeric_count + 1
+    total_count <- total_count + 1
+
+
+
+  } else if (is.factor(two)){
+
+    total_count <- total_count + 1
+
+
+  }
+
+  else {
+
+    stop("please input your second variable as numeric or factor type")
+
+  }
+
+
+  # Classify Third Variable  (Variable used for fill/color)
+  three <- df %>%
+    pull({{fill}})
+
+  if (is.numeric(three)){
+
+    fill_col <- fill
+    total_count <- total_count + 1
+
+
+  } else if (is.factor(three)){
+
+    fill_col <- fill
+    total_count <- total_count + 1
+
+  }
+
+  else {
+
+    stop("please input your third variable as numeric or factor type")
+
+  }
+
+
+
+  # Choose Which Graph to use
+
+  if (total_count == 1 & is.numeric(one)){
+
+    graphs <- c("Histogram", "Density Plot")
+    return(graphs)
+  }
+  else if (total_count == 1 & is.factor(one)){
+
+    graphs <- c("Barplot", "Lollipop", "Waffle", "Word Cloud", " Dougnut", "Treemap", "Pie")
+    return(graphs)
+  }
+
+  # If input 2 variables
+  else if (total_count == 2 & numeric_count == 2){
+
+    graphs <- c("Scatter Plot", "Histogram", " Box Plot", "Violin Plot", " Density Plot", "Line Plot")
+    return(graphs)
+  }
+
+  else if (total_count == 2 & numeric_count == 1){
+
+    graphs <- c("Scatter Plot", "Histogram", " Box Plot", "Violin Plot", " Density Plot", "Line Plot", "Ridge Line", "PCA", "Lollipop")
+    return(graphs)
+  }
+
+
+   else if (total_count == 2 & numeric_count == 0) {
+
+    graphs <- c("Venn Diagram", "Treemap", "Sunburst", "Barplot", "Stacked Bartplot", "Grouped Barplot", "Lollipop", "Spider Plot")
+    return(graphs)
+  }
+
+  else {
+
+    return(NULL)
+  }
+
+}
+
+```
+
+```{r test}
+test_function <- function(df, var1, var2 = NULL, var3 = NULL){
+
+  numeric_count <- 0
+  factor_count <- 0
+  total_count <- 0
+
+  # Classify First Variable
+  one <- df %>%
+    pull({{var1}})
+
+  if (is.numeric(one)){
+
+    numeric_count <- numeric_count + 1
+    total_count <- total_count + 1
+
+  } else if (is.factor(one)){
+
+    total_count <- total_count + 1
+
+
+  }
+
+  else {
+
+    stop("please input your first variable as numeric or factor type")
+
+  }
+  
+  if (is.null(var2) == FALSE){
+    var2 < paste0(var2)
+    two <- df %>%
+      pull({{var2}})
+    
+    if (is.numeric(two)){
+      
+      numeric_count <- numeric_count + 1
+      total_count <- total_count + 1
+      
+      } else if (is.factor(two)){
+        
+        total_count <- total_count + 1
+        
+      }
+    
+    else {
+      
+      stop("please input your second variable as numeric or factor type")
+
+      }
+    
+  } else { 
+    numeric_count <- numeric_count
+    total_count <- total_count
+    
+  }
+  
+
+  if (is.null(var3) == FALSE){
+    var3 < paste0(var3)
+    three <- df %>%
+      pull({{var3}})
+    
+    if (is.numeric(three)){
+      
+      fill_col <- three
+      total_count <- total_count + 1
+      #numeric_count <- numeric_count + 1
+      
+      } else if (is.factor(three)){
+        
+        fill_col <- three
+        total_count <- total_count + 1 
+        
+      }
+    
+    else {
+      
+      stop("please input your third variable as numeric or factor type")
+      
+    }
+    
+  } else { 
+    numeric_count <- numeric_count
+    total_count <- total_count
+    
+    }
+    
+  print(total_count)
+  
+  }
+  
+```
+
