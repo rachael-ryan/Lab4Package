@@ -1,5 +1,22 @@
-test_function <- function(df, total, var1, var2 = NULL, fill = NULL){
+#' Gives a list of potential graphs and charts
+#'
+#' @param df A dataframe
+#' @param n Number of variables to graph
+#' @param var1 A variable from dataframe
+#' @param var2 A variable from dataframe (optional)
+#' @param fill A variable from dataframe used as the fill/color aesthetic (optional)
+#'
+#' @return A vector of possible graphs
+#' @examples
+#' what_graph(iris, 1, Sepal.Length)
+#'
+#' @import tidyverse
+#'
+#' @export
 
+what_graph <- function(df, n, var1, var2 = NULL, fill = NULL){
+
+  library(tidyverse)
   numeric_count <- 0
   factor_count <- 0
   total_count <- 0
@@ -7,7 +24,7 @@ test_function <- function(df, total, var1, var2 = NULL, fill = NULL){
   # Classify First Variable
   one <- df %>%
     pull({{var1}})
-  if (total == 1){
+  if (n == 1){
 
     one <- df %>%
       pull({{var1}})
@@ -33,7 +50,7 @@ test_function <- function(df, total, var1, var2 = NULL, fill = NULL){
   }
 
 
-  else if (total == 2){
+  else if (n == 2){
 
     one <- df %>%
       pull({{var1}})
@@ -83,7 +100,7 @@ test_function <- function(df, total, var1, var2 = NULL, fill = NULL){
 
 
 
-  else if (total == 3){
+  else if (n == 3){
 
     one <- df %>%
       pull({{var1}})
@@ -232,4 +249,4 @@ test_function <- function(df, total, var1, var2 = NULL, fill = NULL){
 
 #meowwwwwwww
 
-what_graph(iris, Sepal.Length)
+
