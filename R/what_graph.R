@@ -1,4 +1,4 @@
-what_graph <- function(df, var1, var2 = as.numeric(), fill = as.numeric()){
+test_function <- function(df, total, var1, var2 = NULL, fill = NULL){
 
   numeric_count <- 0
   factor_count <- 0
@@ -7,76 +7,150 @@ what_graph <- function(df, var1, var2 = as.numeric(), fill = as.numeric()){
   # Classify First Variable
   one <- df %>%
     pull({{var1}})
+  if (total == 1){
 
-  if (is.numeric(one)){
+    one <- df %>%
+      pull({{var1}})
 
-    numeric_count <- numeric_count + 1
-    total_count <- total_count + 1
+    if (is.numeric(one)){
 
-  } else if (is.factor(one)){
+      numeric_count <- numeric_count + 1
+      total_count <- total_count + 1
 
-    total_count <- total_count + 1
+    } else if (is.factor(one)){
 
-
-  }
-
-  else {
-
-    stop("please input your first variable as numeric or factor type")
-
-  }
-
-print(numeric_count)
-
-  # Classify Second Variable
-
-  two <- df %>%
-    pull({{var2}})
-
-  if (is.numeric(two)){
-
-    numeric_count <- numeric_count + 1
-    total_count <- total_count + 1
+      total_count <- total_count + 1
 
 
+    }
 
-  } else if (is.factor(two)){
+    else {
 
-    total_count <- total_count + 1
+      stop("please input your first variable as numeric or factor type")
 
-
-  }
-
-  else {
-
-    stop("please input your second variable as numeric or factor type")
+    }
 
   }
 
 
-  # Classify Third Variable  (Variable used for fill/color)
-  three <- df %>%
-    pull({{fill}})
+  else if (total == 2){
 
-  if (is.numeric(three)){
+    one <- df %>%
+      pull({{var1}})
 
-    fill_col <- fill
-    total_count <- total_count + 1
+    if (is.numeric(one)){
+
+      numeric_count <- numeric_count + 1
+      total_count <- total_count + 1
+
+    } else if (is.factor(one)){
+
+      total_count <- total_count + 1
 
 
-  } else if (is.factor(three)){
+    }
 
-    fill_col <- fill
-    total_count <- total_count + 1
+    else {
+
+      stop("please input your first variable as numeric or factor type")
+
+    }
+
+    two <- df %>%
+      pull({{var2}})
+
+    if (is.numeric(two)){
+
+      numeric_count <- numeric_count + 1
+      total_count <- total_count + 1
+
+
+
+    } else if (is.factor(two)){
+
+      total_count <- total_count + 1
+
+    }
+
+    else {
+
+      stop("please input your second variable as numeric or factor type")
+
+    }
+
 
   }
 
-  else {
 
-    stop("please input your third variable as numeric or factor type")
 
+  else if (total == 3){
+
+    one <- df %>%
+      pull({{var1}})
+
+    if (is.numeric(one)){
+
+      numeric_count <- numeric_count + 1
+      total_count <- total_count + 1
+
+    } else if (is.factor(one)){
+
+      total_count <- total_count + 1
+
+
+    }
+
+    else {
+
+      stop("please input your first variable as numeric or factor type")
+
+    }
+
+    two <- df %>%
+      pull({{var2}})
+
+    if (is.numeric(two)){
+
+      numeric_count <- numeric_count + 1
+      total_count <- total_count + 1
+
+
+
+    } else if (is.factor(two)){
+
+      total_count <- total_count + 1
+
+    }
+
+    else {
+
+      stop("please input your second variable as numeric or factor type")
+
+    }
+
+    three <- df %>%
+      pull({{fill}})
+
+    if (is.numeric(three)){
+
+      fill_col <- three
+      total_count <- total_count + 1
+      numeric_count <- numeric_count + 1
+
+
+    } else if (is.factor(three)){
+
+      fill_col <- three
+      total_count <- total_count + 1
+
+    }
+
+    else {
+
+      stop("please input your third variable as numeric or factor type")
+
+    }
   }
-
 
 
   # Choose Which Graph to use
@@ -101,15 +175,44 @@ print(numeric_count)
 
   else if (total_count == 2 & numeric_count == 1){
 
-    graphs <- c("Scatter Plot", "Histogram", " Box Plot", "Violin Plot", " Density Plot", "Line Plot", "Ridge Line", "PCA", "Lollipop")
+    graphs <- c("Grouped Scatter Plot", "Histogram", " Box Plot", "Violin Plot", " Density Plot", "Line Plot", "Ridge Line", "PCA", "Lollipop")
     return(graphs)
   }
 
 
-   else if (total_count == 2 & numeric_count == 0) {
+  else if (total_count == 2 & numeric_count == 0) {
 
-    graphs <- c("Venn Diagram", "Treemap", "Sunburst", "Barplot", "Stacked Bartplot", "Grouped Barplot", "Lollipop", "Spider Plot")
+    graphs <- c("Venn Diagram", "Treemap", "Sunburst", "Barplot", "Stacked Barplot", "Grouped Barplot", "Lollipop", "Spider Plot")
     return(graphs)
+  }
+
+
+  # If input 3 variables
+
+  else if (total_count == 3 & numeric_count == 3){
+
+    graphs <- c("Scatter Plot", "Stacked Area Plot", " Box Plot", "Violin Plot", "Stream Graph", "Line Plot", "3D Scatter")
+    return(graphs)
+  }
+
+  else if (total_count == 3 & numeric_count == 2){
+
+    graphs <- c("Grouped Scatter Plot", "Stacked Area Plot", " Box Plot", "Violin Plot", " Stream Graph", "Line Plot", "PCA")
+    return(graphs)
+  }
+
+
+  else if (total_count == 3 & numeric_count == 1) {
+
+    graphs <- c("Barplot", "Boxplot", "Violin", "Treemap", "Sunburst", "Arc", "Network")
+    return(graphs)
+  }
+
+  else if (total_count == 3 & numeric_count == 0) {
+
+    graphs <- c("Venn Diagram", "Treemap", "Sunburst", "Barplot", "Stacked Barplot",     "Grouped Barplot", "Lollipop", "Spider Plot")
+    return(graphs)
+
   }
 
   else {
@@ -129,4 +232,4 @@ print(numeric_count)
 
 #meowwwwwwww
 
-#what_graph(iris, Sepal.Length, Sepal.Width)
+what_graph(iris, Sepal.Length)
