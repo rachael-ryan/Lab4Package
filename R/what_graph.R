@@ -10,16 +10,13 @@
 #' @examples
 #' what_graph(iris, 1, Sepal.Length)
 #'
-#' @import tidyverse
+#' @import dplyr
 #'
 #' @export
-
-
 what_graph <- function(df, ...){
 
   dots <- rlang::enexprs(...)
 
-  library(tidyverse)
   numeric_count <- 0
   factor_count <- 0
   total_count <- 0
@@ -29,18 +26,18 @@ what_graph <- function(df, ...){
   one <- df %>%
     pull(dots[[1]])
 
-    if (is.numeric(one)){
+  if (is.numeric(one)){
 
-      numeric_count <- numeric_count + 1
-      total_count <- total_count + 1
+    numeric_count <- numeric_count + 1
+    total_count <- total_count + 1
 
-    } else if (is.factor(one)){
+  } else if (is.factor(one)){
 
-      total_count <- total_count + 1
+    total_count <- total_count + 1
 
-      }
+  }
 
-    else {stop("please input your first variable as numeric or factor type")}
+  else {stop("please input your first variable as numeric or factor type")}
 
   # Second Variable
 
@@ -148,7 +145,7 @@ what_graph <- function(df, ...){
 
 }
 
-what_graph(iris, Species, Sepal.Length, Sepal.Width, Petal.Length)
+#what_graph(iris, Species, Sepal.Length, Sepal.Width, Petal.Length)
 
 #hi
 
@@ -158,5 +155,3 @@ what_graph(iris, Species, Sepal.Length, Sepal.Width, Petal.Length)
 #hey guys!!
 
 #meowwwwwwww
-
-
