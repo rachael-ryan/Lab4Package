@@ -145,13 +145,3 @@ what_graph <- function(df, ...){
 
 }
 
-#what_graph(iris, Species, Sepal.Length, Sepal.Width, Petal.Length)
-
-#hi
-
-# hi this is a test from sam
-#hello sam!
-
-#hey guys!!
-
-#meowwwwwwww
