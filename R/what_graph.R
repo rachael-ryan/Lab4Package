@@ -10,16 +10,13 @@
 #' @examples
 #' what_graph(iris, 1, Sepal.Length)
 #'
-#' @import tidyverse
+#' @import dplyr
 #'
 #' @export
-
-
 what_graph <- function(df, ...){
 
   dots <- rlang::enexprs(...)
 
-  library(tidyverse)
   numeric_count <- 0
   factor_count <- 0
   total_count <- 0
@@ -148,7 +145,7 @@ what_graph <- function(df, ...){
 
 }
 
-what_graph(iris, Species, Sepal.Length, Sepal.Width, Petal.Length)
+#what_graph(iris, Species, Sepal.Length, Sepal.Width, Petal.Length)
 
 #hi
 
