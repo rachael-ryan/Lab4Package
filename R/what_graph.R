@@ -1,14 +1,20 @@
-#' Gives a list of potential graphs and charts
+#' Graph Options
 #'
-#' @param df A dataframe
-#' @param n Number of variables to graph
-#' @param var1 A variable from dataframe
-#' @param var2 A variable from dataframe (optional)
-#' @param fill A variable from dataframe used as the fill/color aesthetic (optional)
+#' what_graph is a function used to analyze what graphs can be created from certain variables depending on the quantity and data type of the variables.
 #'
-#' @return A vector of possible graphs
+#' @param df A data frame.
+#' @param ... 1-3 unquoted column names of the specified df argument, separated by commas.
+#'
+#' @return what_graph returns a character vector of possible graphs that can be created from the variables that are input.
+#'
+#' @details
+#' It is important that before this function is used, the columns of interest have the correct data type.
+#' Specifically, a categorical or discrete variable needs to have a data type of 'factor' and a continuous variable needs to have a data type of 'numeric'
+#'
+#' If the variable types are not numeric or factor the function will not return a list of possible graphs.
+#'
 #' @examples
-#' what_graph(iris, 1, Sepal.Length)
+#' what_graph(iris, Sepal.Length, Sepal.Width)
 #'
 #' @import dplyr
 #'
@@ -91,12 +97,12 @@ what_graph <- function(df, ...){
 
   if (total_count == 1 & is.numeric(one)){
 
-    graphs <- c("Histogram", "Density Plot")
+    graphs <- c("Histogram", "Density Plot", "Normal Probability Plot")
     return(graphs)
 
   } else if (total_count == 1 & is.factor(one)){
 
-    graphs <- c("Barplot", "Lollipop", "Waffle", "Word Cloud", " Dougnut", "Treemap", "Pie")
+    graphs <- c("Bar Chart")
     return(graphs)
 
 
@@ -104,17 +110,16 @@ what_graph <- function(df, ...){
 
   } else if (total_count == 2 & numeric_count == 2){
 
-    graphs <- c("Scatter Plot", "Histogram", " Box Plot", "Violin Plot", " Density Plot", "Line Plot")
-    return(graphs)
+    graphs <- c("Scatter Plot", "Rug Plot")
 
   } else if (total_count == 2 & numeric_count == 1){
 
-    graphs <- c("Grouped Scatter Plot", "Histogram", " Box Plot", "Violin Plot", " Density Plot", "Line Plot", "Ridge Line", "PCA", "Lollipop")
+    graphs <- c("Column Chart", "Stacked Histogram", "Box Plot", "Violin Plot", "Multi Density Plot")
     return(graphs)
 
   } else if (total_count == 2 & numeric_count == 0) {
 
-    graphs <- c("Venn Diagram", "Treemap", "Sunburst", "Barplot", "Stacked Barplot", "Grouped Barplot", "Lollipop", "Spider Plot")
+    graphs <- c("Stacked Bar Chart", "Grouped Bar Chart", "Bubble Plot")
     return(graphs)
   }
 
@@ -123,23 +128,22 @@ what_graph <- function(df, ...){
 
   else if (total_count == 3 & numeric_count == 3){
 
-    graphs <- c("Scatter Plot", "Stacked Area Plot", " Box Plot", "Violin Plot", "Stream Graph", "Line Plot", "3D Scatter")
+    graphs <- c("Gradient Scatter Plot")
     return(graphs)
 
   } else if (total_count == 3 & numeric_count == 2){
 
-    graphs <- c("Grouped Scatter Plot", "Stacked Area Plot", " Box Plot", "Violin Plot", " Stream Graph", "Line Plot", "PCA")
+    graphs <- c("Grouped Scatter Plot")
     return(graphs)
 
   } else if (total_count == 3 & numeric_count == 1) {
 
-    graphs <- c("Barplot", "Boxplot", "Violin", "Treemap", "Sunburst", "Arc", "Network")
+    graphs <- c("Stacked Column Chart", "Grouped Box Plot", "Grouped Violin Plot" )
     return(graphs)
 
   } else if (total_count == 3 & numeric_count == 0) {
 
-    graphs <- c("Venn Diagram", "Treemap", "Sunburst", "Barplot", "Stacked Barplot",     "Grouped Barplot", "Lollipop", "Spider Plot")
-    return(graphs)
+    print("No known ggplot graphs can be created with three seperate discrete variables")
 
   }
 

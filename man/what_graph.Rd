@@ -2,28 +2,28 @@
 % Please edit documentation in R/what_graph.R
 \name{what_graph}
 \alias{what_graph}
-\title{Gives a list of potential graphs and charts}
+\title{Graph Options}
 \usage{
 what_graph(df, ...)
 }
 \arguments{
-\item{df}{A dataframe}
+\item{df}{A data frame.}
 
-\item{n}{Number of variables to graph}
-
-\item{var1}{A variable from dataframe}
-
-\item{var2}{A variable from dataframe (optional)}
-
-\item{fill}{A variable from dataframe used as the fill/color aesthetic (optional)}
+\item{...}{1-3 unquoted column names of the specified df argument, separated by commas.}
 }
 \value{
-A vector of possible graphs
+what_graph returns a character vector of possible graphs that can be created from the variables that are input.
 }
 \description{
-Gives a list of potential graphs and charts
+what_graph is a function used to analyze what graphs can be created from certain variables depending on the quantity and data type of the variables.
+}
+\details{
+It is important that before this function is used, the columns of interest have the correct data type.
+Specifically, a categorical or discrete variable needs to have a data type of 'factor' and a continuous variable needs to have a data type of 'numeric'
+
+If the variable types are not numeric or factor the function will not return a list of possible graphs.
 }
 \examples{
-what_graph(iris, 1, Sepal.Length)
+what_graph(iris, Sepal.Length, Sepal.Width)
 
 }
