@@ -1,14 +1,11 @@
 Package: GGHelper
-Title: Helps Analyst Find and Build the Best Plots
+Title: Eductational Tool to Assist With Visualizing Variables in ggplot2
 Version: 0.0.0.9000
 Authors@R: 
-    person("Trenten", "Tso", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-        person("Sam", "Miller", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-               person("Rachael", "Ryan", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: build plots
+    person("Trenten", "Tso", , "trententso@gmail.com", role = c("aut", "cre"))
+        person("Sam", "Miller", , "sam999miller@gmail.com", role = c("aut", "cre"))
+               person("Rachael", "Ryan", , "rachaelryan00@gmail.com", role = c("aut", "cre"))
+Description: Educational ggplot2 assistant
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
     license
 Encoding: UTF-8
