@@ -111,6 +111,7 @@ what_graph <- function(df, ...){
   } else if (total_count == 2 & numeric_count == 2){
 
     graphs <- c("Scatter Plot")
+    return(graphs)
 
   } else if (total_count == 2 & numeric_count == 1){
 
